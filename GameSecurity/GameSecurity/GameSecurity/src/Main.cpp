@@ -3,9 +3,30 @@
 #include "XOREncoder.h"
 #include "AsciiBinary.h"
 #include "DES.h"
-#include <random>
+#include "Vigenere.h"
 
 int main() {
+	std::string text = "Hola este mensaje otorga una decima";
+	std::string key = "PTS";
+
+	std::cout << "Texto original: " << text << std::endl;
+	std::cout << "Clave: " << key << std::endl;
+
+	Vigenere vigenere(key);
+	std::string encrypted = vigenere.encode(text);
+	std::cout << "Texto cifrado: " << encrypted << std::endl;
+
+	std::string decrypted = vigenere.decode(encrypted);
+	std::cout << "Texto descifrado: " << decrypted << std::endl;
+
+	std::cout << "\n--- Cifrado por fuerza bruta ---" << std::endl;
+	std::string fuerzaBruta = Vigenere::breakBruteForce(encrypted, 3); // longitud máxima de clave = 3
+	std::cout << "Texto descifrado por fuerza bruta: " << fuerzaBruta << std::endl;
+
+	return 0;
+}
+
+/*int main() {
 	// Clave DES de 64 bits
 	std::bitset<64> key("0001001100110100010101110111100110011011101111001101111111110001");
 	std::string phrase = "$Hola DES!";
@@ -40,7 +61,8 @@ int main() {
 
 	std::cout << "Texto descifrado: " << phrase << std::endl;
 	return 0;
-}
+}*/
+
 
 /*// Genera una clave aleatoria de 8 bytes (64 bits)
 std::string generateRandomKey() {
