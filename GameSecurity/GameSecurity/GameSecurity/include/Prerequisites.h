@@ -8,7 +8,8 @@
 #include <cctype>
 #include <algorithm>
 #include <bitset>
+#include <functional> 
+#include <stdexcept>
 #include <random>
-#include <functional>
-#include <cctype>       // para std::isalpha, std::toupper, etc.
-#include <stdexcept>    // para std::invalid_argument
+#include <mutex>
+#include <array>

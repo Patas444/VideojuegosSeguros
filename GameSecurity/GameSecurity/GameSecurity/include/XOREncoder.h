@@ -1,6 +1,5 @@
 #pragma once
 #include "Prerequisites.h"
-#include <fstream>
 
 class 
 XOREncoder {
@@ -8,7 +7,6 @@ public:
 	XOREncoder() = default;
 	~XOREncoder() = default;
 	
-	// Codifica el texto 'input' usando XOR con la clave 'key'.
 	// Encodes the input string using XOR with the provided key. 
 	// Input: The string to be encoded. -> Hola Mundo
 	// Key: The key to be used for encoding. -> clave
@@ -21,7 +19,7 @@ public:
 		return output;
 	}
 
-	// Convierte una cadena hexadecimal (con espacios) a un vector de bytes.
+	// Transform text to hex representation.
 	std::vector<unsigned char> 
 		HexToBytes(const std::string &input) {
 		std::vector<unsigned char> bytes;
@@ -41,7 +39,6 @@ public:
 		return bytes;
 	}
 
-	// Imprime una cadena como valores hexadecimales separados.
 	void
 	printHex(const std::string& input) {
 		for (unsigned char c : input)	{
@@ -49,14 +46,12 @@ public:
 		}
 	}
 
-	// Verifica si una cadena contiene solo caracteres imprimibles.
 	bool isValidText(const std::string& data) {
 		return std::all_of(data.begin(), data.end(), [](unsigned char c) {
 			return std::isprint(c) || std::isspace(c) || c == '\n' || c == ' ';
 			});
 	}
 
-	// Fuerza bruta con claves de un solo byte. Prueba todas las combinaciones posibles (0-255).
 	void
 	bruteForce_1Byte(const std::vector<unsigned char>& cifrado) {
 		for (int clave = 0; clave < 256; ++clave) {
@@ -75,7 +70,6 @@ public:
 		}
 	}
 
-	// Fuerza bruta con claves de 2 bytes. Prueba 256 x 256 combinaciones.
 	void
 	bruteForce_2Byte(const std::vector<unsigned char>& cifrado) {
 		for (int b1 = 0; b1 < 256; ++b1) {
@@ -100,38 +94,11 @@ public:
 		
 	}
 
-	// Fuerza bruta usando claves comunes, incluidas las leídas desde archivos de texto.
 	void bruteForceByDictionary(const std::vector<unsigned char>& cifrado) {
 		std::vector<std::string> clavesComunes = {
 			"clave", "admin", "1234", "root", "test", "abc", "hola", "user",
 			"pass", "12345", "0000", "password", "default"
 		};
-		
-		// Leer claves desde archivos
-		std::vector<std::string> archivos = {
-			"Archivo1.txt",
-			"Archivo2.txt",
-			"Archivo3.txt",
-			"Archivo4.txt",
-			"Archivo5.txt"
-		};
-
-		for (const auto& archivo : archivos) {
-			std::ifstream file(archivo);
-			std::string clave;
-
-			if (file.is_open()) {
-				while (std::getline(file, clave)) {
-					if (!clave.empty()) {
-						clavesComunes.push_back(clave);
-					}
-				}
-				file.close();
-			}
-			else {
-				std::cout << "No se pudo abrir el archivo: " << archivo << std::endl;
-			}
-		}
 
 		for (const auto& clave : clavesComunes) {
 			std::string result;
@@ -140,7 +107,7 @@ public:
 			}
 			if (isValidText(result)) {
 				std::cout << "=============================\n";
-				std::cout << "Clave de Archivo: '" << clave << "'\n";
+				std::cout << "Clave de diccionario: '" << clave << "'\n";
 				std::cout << "Texto posible : " << result << "\n";
 			}
 		}
