@@ -1,4 +1,4 @@
-#include "Prerequisites.h"
+ï»¿#include "Prerequisites.h"
 #include "CesarEncryption.h"
 #include "XOREncoder.h"
 #include "AsciiBinary.h"
@@ -6,13 +6,58 @@
 #include "Vigenere.h"
 #include "CryptoGenerator.h"
 
+#include "FileCrypto.h"
 
 int main() {
-	// 1) Generar una contraseña de 16 caracteres (mayúsculas, minúsculas, dígitos)
+	XOREncoder encoder;
+	std::string key;
+	int opcion;
+
+	do {
+		std::cout << "=== MENU DE CIFRADO XOR ===\n";
+		std::cout << "1) Cifrar Archivos\n";
+		std::cout << "2) Descifrar Archivos\n";
+		std::cout << "3) Salir\n";
+		std::cout << "Selecciona una opcion: ";
+		std::cin >> opcion;
+
+		switch (opcion) {
+		case 1:
+			std::cout << "Ingresa la clave para cifrar: ";
+			std::cin >> key;
+			cifrarArchivo(encoder, key);
+			break;
+		case 2:
+			std::cout << "Ingresa la clave para descifrar: ";
+			std::cin >> key;
+			descifrarArchivo(encoder, key);
+			break;
+		case 3:
+			std::cout << "\nSaliendo del programa... Adioos!\n";
+			break;
+		default:
+			std::cout << "Solo hay 3 opciones . . . no mas. Â¡Intenta de nuevo!\n";
+			break;
+		}
+
+		std::cout << "\nPresiona [ Enter ] para continuar...";
+
+		std::cin.ignore();
+		std::cin.get();
+		system("cls"); // usa "Clear"
+
+	} while (opcion != 3);
+
+	return 0;
+}
+
+// #include "CryptoGenerator.h"
+/*int main() {
+	// 1) Generar una contraseÃ±a de 16 caracteres (mayÃºsculas, minÃºsculas, dÃ­gitos)
 	CryptoGenerator cryptoGen;
 	cryptoGen.generatePassword(16); // Generate a password of length 16
 
-	// 2) Generar 16 bytes aleatorios genéricos
+	// 2) Generar 16 bytes aleatorios genÃ©ricos
 	auto randomBytes = cryptoGen.generateBytes(16);
 	std::cout << "Random Bytes (hex): " << cryptoGen.toHex(randomBytes) << std::endl;
 
@@ -48,7 +93,7 @@ int main() {
 	std::cout << "Password 2: " << "LRobles_32444" << "\n";
 	std::cout << "Estimated Entropy 2: " << entropy2 << " | " << cryptoGen.passwordStrength("LRobles_32444") << "\n";
 
-	// 9) Generar las 3 contraseñas con mayor entropía
+	// 9) Generar las 3 contraseÃ±as con mayor entropÃ­a
 	std::cout << "  " << "\n";
 	auto topPasswords = cryptoGen.passwordsGenerator(20, 15);
 	for (size_t i = 0; i < topPasswords.size(); ++i) {
@@ -58,7 +103,8 @@ int main() {
 	}
 
 	return 0;
-}
+}*/
+
 
 /*int main() {
 	std::string text = "Hola este mensaje otorga una decima y patrocinado por PataSoft";
@@ -75,7 +121,7 @@ int main() {
 	std::cout << "Texto descifrado: " << decrypted << std::endl;
 
 	std::cout << "\n--- Cifrado por fuerza bruta ---" << std::endl;
-	std::string fuerzaBruta = Vigenere::breakBruteForce(encrypted, 3); // longitud máxima de clave = 3
+	std::string fuerzaBruta = Vigenere::breakBruteForce(encrypted, 3); // longitud mÃ¡xima de clave = 3
 	std::cout << "Texto descifrado por fuerza bruta: " << fuerzaBruta << std::endl;
 
 	return 0;
@@ -87,7 +133,7 @@ int main() {
 	std::bitset<64> key("0001001100110100010101110111100110011011101111001101111111110001");
 	std::string phrase = "$Hola DES!";
 
-	// Asegurar que la frase tenga longitud múltiplo de 8
+	// Asegurar que la frase tenga longitud mÃºltiplo de 8
 	while (phrase.size() % 8 != 0) {
 		phrase += '\0'; // null space
 	}
@@ -123,7 +169,7 @@ int main() {
 /*// Genera una clave aleatoria de 8 bytes (64 bits)
 std::string generateRandomKey() {
 	std::string key;
-	std::random_device rd; // fuente de entropía
+	std::random_device rd; // fuente de entropÃ­a
 	std::mt19937 gen(rd()); // generador
 	std::uniform_int_distribution<> dis(0, 255); // valores byte (0 - 255)
 
@@ -166,7 +212,7 @@ int main() {
 
 	std::string phrase = "$Hola DES!";
 
-	// Asegurar múltiplo de 8
+	// Asegurar mÃºltiplo de 8
 	while (phrase.size() % 8 != 0) {
 		phrase += '\0';
 	}

@@ -123,13 +123,13 @@ public:
 	}
 
 	/**
-		* @brief Genera un vector de inicializaci?n (IV) de tama?o dado en bytes.
-		* Un IV es un valor aleatorio que se usa en modos de cifrado sim?trico (CBC, CFB, GCM?)
-		* para garantizar que la misma clave cifre mensajes id?nticos en salidas distintas
-		*
-		* @param blockSize Tama?o del IV en bytes.
-		* @return std::vector<uint8_t> IV generado.
-		*/
+	* @brief Genera un vector de inicializaci?n (IV) de tama?o dado en bytes.
+	* Un IV es un valor aleatorio que se usa en modos de cifrado sim?trico (CBC, CFB, GCM?)
+	* para garantizar que la misma clave cifre mensajes id?nticos en salidas distintas
+	*
+	* @param blockSize Tama?o del IV en bytes.
+	* @return std::vector<uint8_t> IV generado.
+	*/
 	std::vector<uint8_t>
 		generateIV(unsigned int blockSize) {
 		return generateBytes(blockSize);  // Genera un IV aleatorio del tama?o especificado.
@@ -151,11 +151,11 @@ public:
 	}
 
 	/**
-		 * @brief Convierte un vector de bytes a una cadena Base64.
-		 *
-		 * @param data Vector de bytes de entrada.
-		 * @return std::string Representaci?n Base64 (con relleno ?=? si aplica).
-		 */
+	 * @brief Convierte un vector de bytes a una cadena Base64.
+	 *
+	 * @param data Vector de bytes de entrada.
+	 * @return std::string Representaci?n Base64 (con relleno ?=? si aplica).
+	 */
 	std::string
 		toBase64(const std::vector<uint8_t>& data) {
 		static const char* table =

@@ -112,6 +112,26 @@ public:
 			}
 		}
 	}
+
+	// Lee el contenido completo de un archivo en una string
+	std::string readFile(const std::string& filename) {
+		std::ifstream file(filename, std::ios::binary);
+		if (!file) {
+			throw std::runtime_error("No se pudo abrir el archivo: " + filename);
+		}
+		return std::string((std::istreambuf_iterator<char>(file)),
+			std::istreambuf_iterator<char>());
+	}
+
+	// Escribe contenido en un archivo
+	void writeFile(const std::string& filename, const std::string& content) {
+		std::ofstream file(filename, std::ios::binary);
+		if (!file) {
+			throw std::runtime_error("No se pudo escribir el archivo: " + filename);
+		}
+		file.write(content.c_str(), content.size());
+	}
+
 private:
 
 };
