@@ -14,12 +14,33 @@ int main() {
 	int opcion;
 
 	do {
-		std::cout << "=== MENU DE CIFRADO XOR ===\n";
-		std::cout << "1) Cifrar Archivos\n";
-		std::cout << "2) Descifrar Archivos\n";
-		std::cout << "3) Salir\n";
+		std::cout << "== MENU DE CIFRADO XOR ==" << std::endl;
+
+		std::cout << "" << std::endl;
+
+		std::cout << "< ¡AVISOS! >" << std::endl;
+		std::cout << "============================================================================" << std::endl;
+		std::cout << "[Atento usuario para que este programa funcione correctamente debes ubicar ]" << std::endl;
+		std::cout << "[tus archivos en las carpetas corresondientes (Archivos_Org y Archivos_Cif)]" << std::endl;
+		std::cout << "============================================================================" << std::endl;
+		std::cout << "[Su ubicacion esta en:                                                     ]" << std::endl;
+		std::cout << "[Tu ubicacion\VideojuegosSeguros\GameSecurity\GameSecurity\GameSecurity...     ]" << std::endl;
+		std::cout << "[\Archivos_Org o Archivos_Cif                                               ]" << std::endl;
+		std::cout << "============================================================================" << std::endl;
+		std::cout << "[Por ultimo todo los .txt o lo que quieras cifrar debe ir en Archivos_Org  ]" << std::endl;
+		std::cout << "[y lo que esta cifrado y quieras decifrar debe ir en Archivos_Cif.         ]" << std::endl;
+		std::cout << "============================================================================" << std::endl;
+
+		std::cout << "" << std::endl;
+
+		std::cout << "=======================" << std::endl;
+		std::cout << "1) Cifrar Archivos" << std::endl;
+		std::cout << "2) Descifrar Archivos" << std::endl;
+		std::cout << "3) Salir" << std::endl;
+		std::cout << "=======================" << std::endl;
 		std::cout << "Selecciona una opcion: ";
 		std::cin >> opcion;
+
 
 		switch (opcion) {
 		case 1:
@@ -33,14 +54,14 @@ int main() {
 			descifrarArchivo(encoder, key);
 			break;
 		case 3:
-			std::cout << "\nSaliendo del programa... Adioos!\n";
+			std::cout << "Saliendo del programa... Adioos!" << std::endl;
 			break;
 		default:
-			std::cout << "Solo hay 3 opciones . . . no mas. ¡Intenta de nuevo!\n";
+			std::cout << "Solo hay 3 opciones . . . no mas. ¡Intenta de nuevo!" << std::endl;
 			break;
 		}
 
-		std::cout << "\nPresiona [ Enter ] para continuar...";
+		std::cout << "Presiona [ Enter ] para continuar..." << std::endl;
 
 		std::cin.ignore();
 		std::cin.get();
