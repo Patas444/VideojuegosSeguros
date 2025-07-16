@@ -6,12 +6,22 @@ class
 public:
 	Vigenere() = default;
 
+   /**
+    * @brief Construye un cifrador Vigenère con la clave dada.
+    * @param key Clave de cifrado (se normaliza automáticamente a letras mayúsculas).
+    * @throws std::invalid_argument Si la clave está vacía o no contiene letras.
+    */
 	Vigenere(const std::string& key) :key(normalizeKey(key)) {
 		if (key.empty()) {
 			throw std::invalid_argument("La clave no puede estar vac�a o sin letras.");
 		}
 	}
 
+   /**
+	* @brief Normaliza una clave eliminando caracteres no alfabéticos y convirtiendo todo a mayúsculas.
+	* @param rawKey Clave cruda introducida por el usuario.
+	* @return std::string Clave limpia, solo letras en mayúsculas.
+	*/
 	static std::string
 		normalizeKey(const std::string& rawKey) {
 		std::string k;
@@ -23,6 +33,12 @@ public:
 		return k;
 	}
 
+   /**
+	* @brief Cifra un texto con el cifrado Vigenère.
+	*
+	* @param text Texto a cifrar (se mantienen caracteres no alfabéticos sin cambios).
+	* @return std::string Texto cifrado.
+	*/
 	std::string encode(const std::string& text) {
 		std::string result;
 		result.reserve(text.size()); // Reserve space for efficiency
@@ -48,6 +64,11 @@ public:
 		return result; // Return the encoded string
 	}
 
+	/**
+	 * @brief Descifra un texto cifrado con el cifrado Vigenère.
+	 * @param text Texto cifrado.
+	 * @return std::string Texto descifrado (legible si la clave es correcta).
+	 */
 	std::string decode(const std::string& text) {
 		std::string result;
 		result.reserve(text.size()); // Reserve space for efficiency
@@ -73,6 +94,11 @@ public:
 		return result; // Return the encoded string
 	}
 
+   /**
+	* @brief Calcula un "puntaje de legibilidad" basado en palabras comunes en español.
+	* @param text Texto a evaluar.
+	* @return double Puntaje (mayor puntaje implica mayor probabilidad de ser texto legible).
+	*/
 	static double fitness(const std::string& text) {
 		static const std::vector<std::string> comunes = {
 		" DE ", " LA ", " EL ", " QUE ", " Y ",
@@ -100,6 +126,13 @@ public:
 
 	}
 
+	/**
+	* @brief Intenta romper el cifrado Vigenère por fuerza bruta probando todas las claves posibles.
+	* @param maxKeyLenght Longitud máxima de la clave a probar.
+	* @return std::string Clave más probable encontrada.
+	* @details Evalúa cada descifrado con la función @ref fitness para seleccionar la mejor coincidencia.
+	* Imprime en consola la clave y el texto descifrado con mejor puntaje.
+	*/
 	static std::string breakEncode(const std::string& text, int maxKeyLenght) {
 		std::string bestKey;
 		std::string bestText;
@@ -140,6 +173,7 @@ public:
 private:
 	std::string key; // The key for the Vigenere cipher
 };
+
 /*
 #include "Prerequisites.h"
 #include "Vigenere.h"

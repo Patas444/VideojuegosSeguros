@@ -14,9 +14,19 @@
  * dependiendo de la opción
  */
 
+
 int main() {
-	XOREncoder encoder; // Instancia del codificador XOR utilizado para el cifrado/descifrado.
-	std::string key; // Clave ingresada por el usuario para el cifrado o descifrado.
+	XOREncoder xorEncoder;
+	CesarEncryption cesar;
+	std::bitset<64> desKey; // El usuario la ingresará como string
+	DES des;
+	Vigenere vigenere;
+	AsciiBinary asciiBin;
+
+	std::string xorKey;
+	int cesarShift;
+	std::string vigenereKey;
+	std::string desKeyInput;
 	int opcion;
 
 	do {
@@ -39,53 +49,134 @@ int main() {
 
 		std::cout << "" << std::endl;
 
-		std::cout << "=======================" << std::endl;
-		std::cout << "1) Cifrar Archivos" << std::endl;
-		std::cout << "2) Descifrar Archivos" << std::endl;
-		std::cout << "3) Salir" << std::endl;
-		std::cout << "=======================" << std::endl;
+		std::cout << "=== MENU DE CIFRADOS ===" << std::endl;
+		std::cout << "1) Cifrar XOR" << std::endl;
+		std::cout << "2) Descifrar XOR" << std::endl;
+		std::cout << "3) Cifrar Cesar" << std::endl;
+		std::cout << "4) Descifrar Cesar" << std::endl;
+		std::cout << "5) Cifrar DES" << std::endl;
+		std::cout << "6) Descifrar DES" << std::endl;
+		std::cout << "7) Cifrar Vigenere" << std::endl;
+		std::cout << "8) Descifrar Vigenere" << std::endl;
+		std::cout << "9) Convertir ASCII" << std::endl;
+		std::cout << "10) Convertir Binario" << std::endl;
+		std::cout << "11) Salir" << std::endl;
 		std::cout << "Selecciona una opcion: ";
 		std::cin >> opcion;
 
-	   /**
-		* @brief Opción para cifrar archivos.
-		*
-		* Solicita al usuario una clave personalizada y llama a la función
-		* @ref cifrarArchivo para procesar todos los archivos en la carpeta `Archivos_Org`.
-		*/
 		switch (opcion) {
 		case 1:
-			std::cout << "Ingresa la clave para cifrar: ";
-			std::cin >> key;
-			cifrarArchivo(encoder, key);
+			std::cout << "Ingresa la clave para XOR: ";
+			std::cin >> xorKey;
+			cifrarArchivo(xorEncoder, xorKey);
 			break;
 
-		/**
-		 * @brief Opción para descifrar archivos.
-		 *
-		 * Solicita al usuario la clave correcta y llama a la función
-		 * @ref descifrarArchivo para procesar todos los archivos en la carpeta `Archivos_Cif`.
-		 */
 		case 2:
-			std::cout << "Ingresa la clave para descifrar: ";
-			std::cin >> key;
-			descifrarArchivo(encoder, key);
+			std::cout << "Ingresa la clave para XOR: ";
+			std::cin >> xorKey;
+			descifrarArchivo(xorEncoder, xorKey);
 			break;
+
 		case 3:
-			std::cout << "Saliendo del programa... Adioos!" << std::endl;
+			std::cout << "Ingresa el desplazamiento (Cesar): ";
+			std::cin >> cesarShift;
+			cifrarArchivoCesar(cesar, cesarShift);
 			break;
-		default:
-			std::cout << "Solo hay 3 opciones . . . no mas. ¡Intenta de nuevo!" << std::endl;
+
+		case 4:
+			std::cout << "Ingresa el desplazamiento (Cesar): ";
+			std::cin >> cesarShift;
+			descifrarArchivoCesar(cesar, cesarShift);
+			break;
+
+		case 5:
+			std::cout << "Ingresa la clave DES (8 caracteres): ";
+			std::cin >> desKeyInput;
+
+			if (desKeyInput.size() != 8) {
+				std::cerr << "La clave DES debe tener exactamente 8 caracteres.";
+				break;
+			}
+
+			{
+				DES des(DES().stringToBitset64(desKeyInput));
+				cifrarArchivoDES(des);
+			}
+			break;
+
+		case 6:
+			std::cout << "Ingresa la clave DES [8 caracteres]: ";
+			std::cin >> desKeyInput;
+
+			if (desKeyInput.size() != 8) {
+				std::cerr << "La clave DES debe tener exactamente 8 caracteres.";
+				break;
+			}
+
+			{
+				DES des(DES().stringToBitset64(desKeyInput));
+				descifrarArchivoDES(des);
+			}
+			break;
+
+		case 7:
+		{
+			std::cout << "Ingresa la clave Vigenere (Solo letras): " << std::endl;
+			std::cin >> vigenereKey;
+
+			// Validación: solo letras
+			while (!std::all_of(vigenereKey.begin(), vigenereKey.end(), [](unsigned char c) {
+				return std::isalpha(c);
+				})) {
+				std::cerr << "La clave solo puede contener letras... Intenta de nuevo: " << std::endl;
+				std::cin >> vigenereKey;
+			}
+
+			Vigenere vigenere(vigenereKey);
+			cifrarArchivoVigenere(vigenere);
 			break;
 		}
 
-		std::cout << "Presiona [ Enter ] para continuar..." << std::endl;
+		case 8:
+		{
+			std::cout << "Ingresa la clave Vigenere (Solo letras): " << std::endl;
+			std::cin >> vigenereKey;
 
-		std::cin.ignore();
-		std::cin.get();
-		system("cls"); // Limpia la consola antes de mostrar el menú nuevamente.
+			while (!std::all_of(vigenereKey.begin(), vigenereKey.end(), [](unsigned char c) {
+				return std::isalpha(c);
+				})) {
+				std::cerr << "La clave solo puede contener letras... Intenta de nuevo: " << std::endl;
+				std::cin >> vigenereKey;
+			}
 
-	} while (opcion != 3);
+			Vigenere vigenere(vigenereKey);
+			descifrarArchivoVigenere(vigenere);
+			break;
+		}
+
+		case 9:
+			cifrarArchivoAsciiBinary(asciiBin);
+			break;
+
+		case 10:
+			descifrarArchivoAsciiBinary(asciiBin);
+			break;
+		case 11:
+			std::cout << "\nSaliendo del programa... ¡Adiós!\n";
+			break;
+		default:
+			std::cout << "Solo hay 3 opciones ... no mas... ¡Intenta de nuevo!" << std::endl;
+			break;
+		}
+
+		if (opcion != 11) {
+			std::cout << "\nPresiona [Enter] para continuar...";
+			std::cin.ignore();
+			std::cin.get();
+			system("cls");
+		}
+
+	} while (opcion != 11);
 
 	return 0;
 }
