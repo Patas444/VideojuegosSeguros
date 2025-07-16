@@ -1,15 +1,23 @@
 #pragma once
 #include "Prerequisites.h"
 
+
+/**
+ * @file XOREncoder.h
+ * Clase para cifrar/descifrar datos con XOR y realizar ataques de fuerza bruta.
+ */
 class 
 XOREncoder {
 public:
 	XOREncoder() = default;
 	~XOREncoder() = default;
 	
-	// Encodes the input string using XOR with the provided key. 
-	// Input: The string to be encoded. -> Hola Mundo
-	// Key: The key to be used for encoding. -> clave
+	/**
+     * @brief Cifra o descifra una cadena usando XOR con la clave proporcionada.
+     * @param input Cadena a procesar (texto plano o cifrado).
+     * @param key Clave para el XOR (se repite en bucle si es más corta que el texto).
+     * @return std::string Cadena resultante (texto cifrado o descifrado).
+     */
 	std::string 
 	encode(const std::string& input, const std::string& key) {
 		std::string output = input;
@@ -19,7 +27,11 @@ public:
 		return output;
 	}
 
-	// Transform text to hex representation.
+	/**
+	 * @brief Convierte un texto hexadecimal en un vector de bytes.
+	 * @param input Cadena con valores hexadecimales separados por espacios.
+	 * @return std::vector<unsigned char> Vector de bytes correspondiente.
+	 */
 	std::vector<unsigned char> 
 		HexToBytes(const std::string &input) {
 		std::vector<unsigned char> bytes;
@@ -39,6 +51,10 @@ public:
 		return bytes;
 	}
 
+   /**
+    * @brief Imprime una cadena en formato hexadecimal (útil para depuración).
+    * @param input Texto a mostrar en hex.
+    */
 	void
 	printHex(const std::string& input) {
 		for (unsigned char c : input)	{
@@ -46,12 +62,26 @@ public:
 		}
 	}
 
+   /**
+    * @brief Verifica si un texto contiene solo caracteres imprimibles y espacios.
+
+    * @param data Texto a validar.
+    * @return true Si el texto es legible (imprimible).
+    * @return false Si contiene caracteres no imprimibles.
+    */
 	bool isValidText(const std::string& data) {
 		return std::all_of(data.begin(), data.end(), [](unsigned char c) {
 			return std::isprint(c) || std::isspace(c) || c == '\n' || c == ' ';
 			});
 	}
 
+   /**
+    * @brief Fuerza bruta probando todas las posibles claves de 1 byte.
+    *
+    * @param cifrado Datos cifrados en bytes.
+    *
+    * @details Imprime las posibles claves y el texto legible encontrado.
+    */
 	void
 	bruteForce_1Byte(const std::vector<unsigned char>& cifrado) {
 		for (int clave = 0; clave < 256; ++clave) {
@@ -70,6 +100,11 @@ public:
 		}
 	}
 
+	/**
+	* @brief Fuerza bruta probando todas las combinaciones posibles de 2 bytes.
+	* @param cifrado Datos cifrados en bytes.
+	* @details Imprime las claves candidatas y el texto resultante si es legible.
+	*/
 	void
 	bruteForce_2Byte(const std::vector<unsigned char>& cifrado) {
 		for (int b1 = 0; b1 < 256; ++b1) {
@@ -94,6 +129,11 @@ public:
 		
 	}
 
+	/**
+	* @brief Prueba claves comunes (diccionario) para intentar descifrar.
+	* @param cifrado Datos cifrados en bytes.
+	* @details Usa claves frecuentes como "clave", "admin", "1234" y otras.
+	*/
 	void bruteForceByDictionary(const std::vector<unsigned char>& cifrado) {
 		std::vector<std::string> clavesComunes = {
 			"clave", "admin", "1234", "root", "test", "abc", "hola", "user",

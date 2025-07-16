@@ -140,7 +140,6 @@
     <ClInclude Include="include\XOREncoder.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\FileCrypto.cpp" />
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -5,12 +5,18 @@
 #include "DES.h"
 #include "Vigenere.h"
 #include "CryptoGenerator.h"
-
 #include "FileCrypto.h"
 
+/**
+ * @brief Función principal del programa.
+ * Muestra un menú interactivo que permite al usuario.
+ * Cifrar y descifrar llamando a "FileCrypto.h y cpp"
+ * dependiendo de la opción
+ */
+
 int main() {
-	XOREncoder encoder;
-	std::string key;
+	XOREncoder encoder; // Instancia del codificador XOR utilizado para el cifrado/descifrado.
+	std::string key; // Clave ingresada por el usuario para el cifrado o descifrado.
 	int opcion;
 
 	do {
@@ -18,17 +24,17 @@ int main() {
 
 		std::cout << "" << std::endl;
 
-		std::cout << "< ¡AVISOS! >" << std::endl;
+		std::cout << "< AVISO! >" << std::endl;
 		std::cout << "============================================================================" << std::endl;
-		std::cout << "[Atento usuario para que este programa funcione correctamente debes ubicar ]" << std::endl;
-		std::cout << "[tus archivos en las carpetas corresondientes (Archivos_Org y Archivos_Cif)]" << std::endl;
+		std::cout << "[Atento usuario para que este programa funcione correctamente debes ubicar  ]" << std::endl;
+		std::cout << "[tus archivos en las carpetas correspondientes (Archivos_Org y Archivos_Cif)]" << std::endl;
 		std::cout << "============================================================================" << std::endl;
-		std::cout << "[Su ubicacion esta en:                                                     ]" << std::endl;
-		std::cout << "[Tu ubicacion\VideojuegosSeguros\GameSecurity\GameSecurity\GameSecurity...     ]" << std::endl;
-		std::cout << "[\Archivos_Org o Archivos_Cif                                               ]" << std::endl;
+		std::cout << "[Su ubicacion esta en:                                                      ]" << std::endl;
+		std::cout << "[ [Location] \VideojuegosSeguros\GameSecurity\GameSecurity\GameSecurity...      ]" << std::endl;
+		std::cout << "[\Archivos_Org o Archivos_Cif                                                ]" << std::endl;
 		std::cout << "============================================================================" << std::endl;
-		std::cout << "[Por ultimo todo los .txt o lo que quieras cifrar debe ir en Archivos_Org  ]" << std::endl;
-		std::cout << "[y lo que esta cifrado y quieras decifrar debe ir en Archivos_Cif.         ]" << std::endl;
+		std::cout << "[Por ultimo todo los .txt o lo que quieras cifrar debe ir en Archivos_Org   ]" << std::endl;
+		std::cout << "[y lo que esta cifrado y quieras decifrar debe ir en Archivos_Cif.          ]" << std::endl;
 		std::cout << "============================================================================" << std::endl;
 
 		std::cout << "" << std::endl;
@@ -41,13 +47,25 @@ int main() {
 		std::cout << "Selecciona una opcion: ";
 		std::cin >> opcion;
 
-
+	   /**
+		* @brief Opción para cifrar archivos.
+		*
+		* Solicita al usuario una clave personalizada y llama a la función
+		* @ref cifrarArchivo para procesar todos los archivos en la carpeta `Archivos_Org`.
+		*/
 		switch (opcion) {
 		case 1:
 			std::cout << "Ingresa la clave para cifrar: ";
 			std::cin >> key;
 			cifrarArchivo(encoder, key);
 			break;
+
+		/**
+		 * @brief Opción para descifrar archivos.
+		 *
+		 * Solicita al usuario la clave correcta y llama a la función
+		 * @ref descifrarArchivo para procesar todos los archivos en la carpeta `Archivos_Cif`.
+		 */
 		case 2:
 			std::cout << "Ingresa la clave para descifrar: ";
 			std::cin >> key;
@@ -65,7 +83,7 @@ int main() {
 
 		std::cin.ignore();
 		std::cin.get();
-		system("cls"); // usa "Clear"
+		system("cls"); // Limpia la consola antes de mostrar el menú nuevamente.
 
 	} while (opcion != 3);
 
