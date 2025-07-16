@@ -1,8 +1,6 @@
 # VideojuegosSeguros Programa de Cifrado.
 
-Bienvenido usuario, este es un programa para la encriptación de archivos con el método de cifrado XOR. Con este programa 
-puedes encriptar y desencriptar archivos de texto ya sea para ocultar datos personales, textos confidenciales, etc . . .
-o también para revelar los textos que estén encriptados con el mismo método XOR.
+Bienvenido usuario, este es un programa para la encriptación de archivos con varios métodos de cifrado como XOR, César, DES, Vigenere y ASCII-BIN. Con este programa puedes encriptar y desencriptar archivos de texto ya sea para ocultar datos personales, textos confidenciales, etc . . .o también para revelar los textos que estén encriptados con el mismo método y su respectiva clave.
 
 # Manual de Instrucciones
 -DESCARGA-  
@@ -34,7 +32,7 @@ Lu ubicación de estas carpetas están en:
 
 2. Para cifrar escribe 1,3,5,7 o 9 (Dependiendo del Tipo de cifrado que desees).
 1) Cifrar XOR
-3) Cifrar Cesar
+3) Cifrar César
 5) Cifrar DES
 7) Cifrar Vigenere
 9) Convertir ASCII
@@ -62,7 +60,7 @@ Para cada cifra tiene distintos tipos de claves:
 
 2. Para descifrar escribe 2,4,6,8 o 10 (Dependiendo del Tipo de descifrado que desees).
 2) Descifrar XOR
-4) Descifrar Cesar
+4) Descifrar César
 6) Descifrar DES
 8) Descifrar Vigenere
 10) Convertir Binario
