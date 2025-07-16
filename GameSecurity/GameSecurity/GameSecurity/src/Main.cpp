@@ -30,7 +30,7 @@ int main() {
 	int opcion;
 
 	do {
-		std::cout << "== MENU DE CIFRADO XOR ==" << std::endl;
+		std::cout << "== MENU DE CIFRADO ==" << std::endl;
 
 		std::cout << "" << std::endl;
 
@@ -78,19 +78,19 @@ int main() {
 			break;
 
 		case 3:
-			std::cout << "Ingresa el desplazamiento (Cesar): ";
+			std::cout << "Ingresa el desplazamiento [1-25]: ";
 			std::cin >> cesarShift;
 			cifrarArchivoCesar(cesar, cesarShift);
 			break;
 
 		case 4:
-			std::cout << "Ingresa el desplazamiento (Cesar): ";
+			std::cout << "Ingresa el desplazamiento [1-25]: ";
 			std::cin >> cesarShift;
 			descifrarArchivoCesar(cesar, cesarShift);
 			break;
 
 		case 5:
-			std::cout << "Ingresa la clave DES (8 caracteres): ";
+			std::cout << "Ingresa la clave DES [8 caracteres]: ";
 			std::cin >> desKeyInput;
 
 			if (desKeyInput.size() != 8) {
@@ -121,7 +121,7 @@ int main() {
 
 		case 7:
 		{
-			std::cout << "Ingresa la clave Vigenere (Solo letras): " << std::endl;
+			std::cout << "Ingresa la clave Vigenere [Solo letras]: " << std::endl;
 			std::cin >> vigenereKey;
 
 			// Validación: solo letras
@@ -139,7 +139,7 @@ int main() {
 
 		case 8:
 		{
-			std::cout << "Ingresa la clave Vigenere (Solo letras): " << std::endl;
+			std::cout << "Ingresa la clave Vigenere [Solo letras]: " << std::endl;
 			std::cin >> vigenereKey;
 
 			while (!std::all_of(vigenereKey.begin(), vigenereKey.end(), [](unsigned char c) {
