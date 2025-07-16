@@ -1,8 +1,6 @@
-# VideojuegosSeguros Programa de Cifrado XOR.
+# VideojuegosSeguros Programa de Cifrado.
 
-Bienvenido usuario, este es un programa para la encriptación de archivos con el método de cifrado XOR. Con este programa 
-puedes encriptar y desencriptar archivos de texto ya sea para ocultar datos personales, textos confidenciales, etc . . .
-o también para revelar los textos que estén encriptados con el mismo método XOR.
+Bienvenido usuario, este es un programa para la encriptación de archivos con varios métodos de cifrado como XOR, César, DES, Vigenere y ASCII-BIN. Con este programa puedes encriptar y desencriptar archivos de texto ya sea para ocultar datos personales, textos confidenciales, etc . . .o también para revelar los textos que estén encriptados con el mismo método y su respectiva clave.
 
 # Manual de Instrucciones
 -DESCARGA-  
@@ -30,38 +28,53 @@ Lu ubicación de estas carpetas están en:
 <img width="993" height="455" alt="image" src="https://github.com/user-attachments/assets/e2b754bd-42b3-4bc3-aa42-c1e9251e3bea" />
 
 # -INSTRUCCIONES DE USO-ENCRIPTAR
-1. Al iniciar el programa verás 3 opciones. 
+1. Al iniciar el programa verás 11 opciones. 
 
-2. Para cifrar escribe 1 y de enter.
+2. Para cifrar escribe 1,3,5,7 o 9 (Dependiendo del Tipo de cifrado que desees).
+1) Cifrar XOR
+3) Cifrar César
+5) Cifrar DES
+7) Cifrar Vigenere
+9) Convertir ASCII
 
-3. Escribe la clave que tendrá el encriptado (Guárdalo para poder desencriptar)
+3. Al seleccionar cualquiera de ello, se te solicitará escribir una clave que tendrá el cifrado(Guárdalo para hacer el descifrado)
 
-4. Escribe el nombre del archivo de tu texto(txt).
+Para cada cifra tiene distintos tipos de claves:
+1) Cifrar XOR: Por número
+3) Cifrar Cesar: Numero pero solo del [1-25]
+5) Cifrar DES: Tu clave debe ser mínimo de 8 caracteres
+7) Cifrar Vigenere: Tu clave debe ser con Letra
+9) Convertir ASCII: No te solicitara clave
 
-5. Luego escribe el nombre de tu nuevo archivo (Este será el encriptado que recibirás en la carpeta Archivos_Cif).
+4. En cualquiera de los métodos se te pedirá el nombre del archivo de tu texto(txt).
 
-6. Listo el programa hará el resto y te mostrará cómo quedó encriptado. (Si elimine el archivo original si solo quiere mantener el encriptado, también puede verificarlo abriendo el archivo en la carpeta).
+5. Luego deberás darle un nombre a tu nuevo archivo (Este será el encriptado que recibirás en la carpeta Archivos_Cif).
 
-<img width="1115" height="628" alt="image" src="https://github.com/user-attachments/assets/d8b54880-da10-4f75-a01b-7c834b37ac4f" />
+6. Listo el programa hará el resto y te mostrará cómo quedó encriptado.
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/1806ff6f-dc61-41ac-8f8b-aa6f6b193456" />
 
 # -INSTRUCCIONES DE USO-DESENCRIPTAR
 
-Al iniciar el programa verás 3 opciones.
+1. Al iniciar el programa verás 11 opciones. 
 
+2. Para descifrar escribe 2,4,6,8 o 10 (Dependiendo del Tipo de descifrado que desees).
+2) Descifrar XOR
+4) Descifrar César
+6) Descifrar DES
+8) Descifrar Vigenere
+10) Convertir Binario
 
-Para cifrar escribe 2 y de enter.
+3. Al seleccionar cualquiera de ello, se te solicitará escribir una clave la clave que se le dio al cifrado (Recuerda usar la clave correcta).
 
+4. En cualquiera de los métodos se te pedirá el nombre del archivo cifrado(enc, ces, bin, des y vig).
 
-Escribe la clave que se le dio al encriptado. 
+5.Luego deberás darle un nombre a tu nuevo archivo(Este será el descifrado que recibirás en la carpeta Archivos_Cif).
 
-Escribe el nombre del archivo de tu encriptado(enc).
+Listo el programa hará el resto y te mostrará el descifrado. (También puede verificarlo abriendo el archivo en la carpeta).
 
+(Nota: Si la clave es errónea no se hará el descifrado y se mostrará el archivo aun en su estado encriptado o de una forma rara).
 
-Luego escribe el nombre de tu nuevo archivo (Este será el desencriptado que recibirás en la carpeta Archivos_Org).
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/4f243b50-3c4f-4c69-a1ff-de6b179fecdf" />
 
-Listo el programa hará el resto y te mostrará el desencriptado. (También puede verificarlo abriendo el archivo en la carpeta).
-
-(Nota: Si la clave es erróneo no se desencriptará y se mostrará el archivo aun en su estado encriptado)
-
-<img width="1115" height="628" alt="image" src="https://github.com/user-attachments/assets/a23c40cc-5c88-43f9-af81-97163279057c" />
 
